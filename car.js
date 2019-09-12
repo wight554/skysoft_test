@@ -42,17 +42,20 @@ class Car extends Vehicle {
         super(name, fuel, nitro)
         this.nitro = false
     }
+
+    canMove() {
+        return this.fuel >= this.step
+    }
+
     switchNitroOn() {
+        if(!this.nitro) return 'This car can\'t use nitro'
         this.step = 2
         return 'Nitro: ON'
     }
     switchNitroOff() {
+        if(!this.nitro) return 'This car can\'t use nitro'
         this.step = 1
         return 'Nitro: OFF'
-    }
-
-    canMove() {
-        return this.fuel >= this.step
     }
 
     moveLeft() {
@@ -80,7 +83,7 @@ class Car extends Vehicle {
     }
 }
 
-let a = new Car('Nitromoped', 8, true);
+let a = new Car('NitroCar', 8, true); // 'I'm NitroCar'
 console.log(a.moveForward()); // '(1, 0) The fuel is 7L'
 console.log(a.switchNitroOn()); // 'Nitro: ON'  
 console.log(a.moveForward()); // '(3, 0) The fuel is 5L'
@@ -90,3 +93,5 @@ console.log(a.moveBack()); // '(2, 2) The fuel is 2L'
 console.log(a.moveRight()); // '(2, 1) The fuel is 1L'
 console.log(a.moveRight()); // '(2, 0) The fuel is 0L'
 console.log(a.moveLeft()); // 'Can't move anymore, fuel low'
+let b = new Car('NoNitroCar', 8, false); // 'I'm NoNitroCar'
+console.log(a.switchNitroOn()); // 'This car can't use nitro'  
